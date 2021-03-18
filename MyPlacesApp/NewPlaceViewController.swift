@@ -14,6 +14,7 @@ class NewPlaceViewController: UITableViewController {
     @IBOutlet weak var placeLocation: UITextField!
     @IBOutlet weak var placeType: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var starsStackView: UIStackView!
     
     var photoChanged = false
     var placeToEdit: Place?
@@ -78,6 +79,9 @@ class NewPlaceViewController: UITableViewController {
     
     func setupNavigationBar() {
         self.navigationItem.leftBarButtonItem = nil
+        if let topItem = self.navigationController?.navigationBar.topItem {
+            topItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        }
         self.title = self.placeToEdit?.name
         self.saveButton.isEnabled = true
     }
