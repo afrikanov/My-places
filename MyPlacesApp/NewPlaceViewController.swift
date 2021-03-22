@@ -120,16 +120,16 @@ class NewPlaceViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "openMapAction" {
+        if segue.identifier == "openPlaceLocation" {
             guard let mapVC = segue.destination as? MapViewController else {
                 return
             }
+            mapVC.incomeSegueIdentifier = segue.identifier!
             var imageData: Data!
             
             if self.placeToEdit != nil {
                 self.photoChanged = true
             }
-            
             if self.photoChanged {
                 imageData = self.placeImage.image?.pngData()
             } else {
@@ -137,6 +137,12 @@ class NewPlaceViewController: UITableViewController {
             }
             let place = Place(name: self.placeLabel.text!, location: self.placeLocation.text, type: self.placeType.text, imageData: imageData, rating: starsStackView.currentRating)
             mapVC.place = place
+        } else if segue.identifier == "choosePlaceLocation" {
+            guard let mapVC = segue.destination as? MapViewController else {
+                return
+            }
+            mapVC.delegate = self
+            mapVC.incomeSegueIdentifier = segue.identifier!
         }
     }
 }
@@ -190,4 +196,10 @@ extension NewPlaceViewController: UIImagePickerControllerDelegate, UINavigationC
         dismiss(animated: true)
     }
     
+}
+
+extension NewPlaceViewController: MapViewControllerDelegate {
+    func getAddress(address: String) {
+        self.placeLocation.text = address
+    }
 }
