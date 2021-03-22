@@ -45,6 +45,10 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.isFiltering ? filteredPlaces!.count : places.count
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tableView.deselectRow(at: indexPath, animated: true)
+    }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "placeCell", for: indexPath) as! CustomTableViewCell
@@ -55,6 +59,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.placeLocation?.text = place.location
         cell.placeType?.text = place.type
         cell.placeImage?.image = UIImage(data: place.imageData!)
+        cell.starStackView.currentRating = place.rating
         
         cell.placeImage?.layer.cornerRadius = (cell.placeImage?.frame.height)! / 2
         cell.placeImage?.clipsToBounds = true

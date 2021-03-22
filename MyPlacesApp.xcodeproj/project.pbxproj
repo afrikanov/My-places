@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F251D492604985900637EF4 /* StarStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F251D482604985900637EF4 /* StarStackView.swift */; };
+		1F251D4F2604DA8600637EF4 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F251D4E2604DA8600637EF4 /* MapViewController.swift */; };
 		1F3A561F26000505004B3EFF /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3A561E26000505004B3EFF /* StorageManager.swift */; };
 		1F6EF62025F132F300CC7424 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6EF61F25F132F300CC7424 /* AppDelegate.swift */; };
 		1F6EF62225F132F300CC7424 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6EF62125F132F300CC7424 /* SceneDelegate.swift */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F251D482604985900637EF4 /* StarStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarStackView.swift; sourceTree = "<group>"; };
+		1F251D4E2604DA8600637EF4 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		1F3A561E26000505004B3EFF /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		1F6EF61C25F132F300CC7424 /* MyPlacesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyPlacesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F6EF61F25F132F300CC7424 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +82,8 @@
 				1F6EF63B25F179D900CC7424 /* PlaceModel.swift */,
 				1F6EF63F25F17DF900CC7424 /* NewPlaceViewController.swift */,
 				1F3A561E26000505004B3EFF /* StorageManager.swift */,
+				1F251D482604985900637EF4 /* StarStackView.swift */,
+				1F251D4E2604DA8600637EF4 /* MapViewController.swift */,
 				1F6EF62525F132F300CC7424 /* Main.storyboard */,
 				1F6EF62825F132F600CC7424 /* Assets.xcassets */,
 				1F6EF62A25F132F600CC7424 /* LaunchScreen.storyboard */,
@@ -221,7 +227,9 @@
 				1F6EF64025F17DF900CC7424 /* NewPlaceViewController.swift in Sources */,
 				1F6EF62025F132F300CC7424 /* AppDelegate.swift in Sources */,
 				1F3A561F26000505004B3EFF /* StorageManager.swift in Sources */,
+				1F251D4F2604DA8600637EF4 /* MapViewController.swift in Sources */,
 				1F6EF63C25F179D900CC7424 /* PlaceModel.swift in Sources */,
+				1F251D492604985900637EF4 /* StarStackView.swift in Sources */,
 				1F6EF63925F164C000CC7424 /* CustomTableViewCell.swift in Sources */,
 				1F6EF62225F132F300CC7424 /* SceneDelegate.swift in Sources */,
 			);

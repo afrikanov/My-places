@@ -30,11 +30,24 @@
                                                     <rect key="frame" x="10" y="10" width="394" height="230"/>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jZl-R1-6fx">
+                                                    <rect key="frame" x="344" y="180" width="60" height="60"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="60" id="0d5-yo-Nmk"/>
+                                                        <constraint firstAttribute="height" constant="60" id="lIa-Y9-Fw1"/>
+                                                    </constraints>
+                                                    <state key="normal" image="map"/>
+                                                    <connections>
+                                                        <segue destination="Sj3-Ge-U4c" kind="presentation" identifier="openMapAction" modalPresentationStyle="fullScreen" id="HrL-7Y-bOK"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="vUC-Nl-kQ4" firstAttribute="leading" secondItem="Etp-a8-D4F" secondAttribute="leading" constant="10" id="261-ys-lhJ"/>
                                                 <constraint firstItem="vUC-Nl-kQ4" firstAttribute="top" secondItem="Etp-a8-D4F" secondAttribute="top" constant="10" id="3Dc-jo-BVr"/>
                                                 <constraint firstAttribute="bottom" secondItem="vUC-Nl-kQ4" secondAttribute="bottom" constant="10" id="KCg-Rj-O5c"/>
+                                                <constraint firstAttribute="bottom" secondItem="jZl-R1-6fx" secondAttribute="bottom" constant="10" id="cjs-hi-d6P"/>
+                                                <constraint firstAttribute="trailing" secondItem="jZl-R1-6fx" secondAttribute="trailing" constant="10" id="pa4-2f-8Qf"/>
                                                 <constraint firstAttribute="trailing" secondItem="vUC-Nl-kQ4" secondAttribute="trailing" constant="10" id="u53-7m-1fc"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -154,11 +167,20 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="130"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="znJ-qi-C7k">
-                                                    <rect key="frame" x="74" y="11" width="267" height="108"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="znJ-qi-C7k" customClass="StarStackView" customModule="MyPlacesApp" customModuleProvider="target">
+                                                    <rect key="frame" x="81" y="43" width="252" height="44"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="starSize">
+                                                            <real key="value" value="44"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isEditable" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </stackView>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="znJ-qi-C7k" firstAttribute="centerY" secondItem="3yZ-as-4KK" secondAttribute="centerY" id="bKZ-VJ-JhQ"/>
+                                                <constraint firstItem="znJ-qi-C7k" firstAttribute="centerX" secondItem="3yZ-as-4KK" secondAttribute="centerX" id="dXl-Ax-tdh"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -182,6 +204,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="mapButton" destination="jZl-R1-6fx" id="FkH-Ir-Blj"/>
                         <outlet property="placeImage" destination="vUC-Nl-kQ4" id="wlA-uK-4bi"/>
                         <outlet property="placeLabel" destination="Am2-L2-4X8" id="bbz-iN-BEC"/>
                         <outlet property="placeLocation" destination="pmh-0h-bnQ" id="iax-hF-E31"/>
@@ -194,6 +217,52 @@
                 <exit id="1N0-uC-wzD" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-272.46376811594206" y="-123.21428571428571"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="2Rc-uC-dSy">
+            <objects>
+                <viewController id="Sj3-Ge-U4c" customClass="MapViewController" customModule="MyPlacesApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MXY-sc-RFG">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Hem-xd-pku">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Sj3-Ge-U4c" id="Q5n-aB-Hcv"/>
+                                </connections>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yqq-8n-7VR">
+                                <rect key="frame" x="334" y="84" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="aax-V8-L7Q"/>
+                                    <constraint firstAttribute="width" constant="40" id="y18-BY-R9q"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="cancel"/>
+                                <connections>
+                                    <action selector="exitMap:" destination="Sj3-Ge-U4c" eventType="touchUpInside" id="QD0-pg-Y4I"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Tr6-AY-NT3"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Hem-xd-pku" firstAttribute="leading" secondItem="MXY-sc-RFG" secondAttribute="leading" id="5Bd-er-Ho3"/>
+                            <constraint firstItem="Tr6-AY-NT3" firstAttribute="trailing" secondItem="yqq-8n-7VR" secondAttribute="trailing" constant="40" id="8DL-A2-a00"/>
+                            <constraint firstItem="yqq-8n-7VR" firstAttribute="top" secondItem="Tr6-AY-NT3" secondAttribute="top" constant="40" id="G4E-0w-Utv"/>
+                            <constraint firstAttribute="bottom" secondItem="Hem-xd-pku" secondAttribute="bottom" id="M1b-ga-HPi"/>
+                            <constraint firstItem="Hem-xd-pku" firstAttribute="top" secondItem="MXY-sc-RFG" secondAttribute="top" id="alf-DF-3Q7"/>
+                            <constraint firstItem="Hem-xd-pku" firstAttribute="trailing" secondItem="MXY-sc-RFG" secondAttribute="trailing" id="uQt-PU-Zgw"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="m0E-Ip-HaN"/>
+                    <connections>
+                        <outlet property="mapView" destination="Hem-xd-pku" id="mhw-5C-Hkw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lwH-Zg-rKw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="566.66666666666674" y="-123.21428571428571"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="igH-43-8dY">
@@ -262,36 +331,47 @@
                                                     </constraints>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Xsx-JL-cCd">
-                                                    <rect key="frame" x="96" y="8" width="302" height="69"/>
+                                                    <rect key="frame" x="96" y="8" width="176" height="69"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b8F-C3-l3F">
-                                                            <rect key="frame" x="0.0" y="0.0" width="302" height="24.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="176" height="24.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="phc-1O-Pvj">
-                                                            <rect key="frame" x="0.0" y="29.5" width="302" height="19.5"/>
+                                                            <rect key="frame" x="0.0" y="29.5" width="176" height="19.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HYn-Bw-xpq">
-                                                            <rect key="frame" x="0.0" y="54" width="302" height="15"/>
+                                                            <rect key="frame" x="0.0" y="54" width="176" height="15"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                 </stackView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r38-gm-Hpa" customClass="StarStackView" customModule="MyPlacesApp" customModuleProvider="target">
+                                                    <rect key="frame" x="292" y="32.5" width="100" height="20"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="starSize">
+                                                            <real key="value" value="20"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isEditable" value="NO"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="r38-gm-Hpa" firstAttribute="leading" secondItem="Xsx-JL-cCd" secondAttribute="trailing" constant="20" id="JVU-qL-mhj"/>
                                                 <constraint firstItem="Xsx-JL-cCd" firstAttribute="top" secondItem="aqp-tD-1Uq" secondAttribute="top" constant="8" id="JZR-HY-URW"/>
                                                 <constraint firstItem="eQe-DF-2fX" firstAttribute="top" secondItem="aqp-tD-1Uq" secondAttribute="top" constant="10" id="Pr9-E1-GOi"/>
                                                 <constraint firstItem="Xsx-JL-cCd" firstAttribute="leading" secondItem="eQe-DF-2fX" secondAttribute="trailing" constant="16" id="Us8-U4-uog"/>
                                                 <constraint firstItem="eQe-DF-2fX" firstAttribute="leading" secondItem="aqp-tD-1Uq" secondAttribute="leading" constant="15" id="lem-4e-9RO"/>
+                                                <constraint firstAttribute="trailing" secondItem="r38-gm-Hpa" secondAttribute="trailing" constant="22" id="mpq-NT-QdF"/>
                                                 <constraint firstAttribute="bottom" secondItem="Xsx-JL-cCd" secondAttribute="bottom" constant="8" id="v7U-h1-gpd"/>
-                                                <constraint firstAttribute="trailing" secondItem="Xsx-JL-cCd" secondAttribute="trailing" constant="16" id="xIM-ct-H4s"/>
+                                                <constraint firstItem="r38-gm-Hpa" firstAttribute="centerY" secondItem="aqp-tD-1Uq" secondAttribute="centerY" id="yEL-zO-qhl"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -299,6 +379,7 @@
                                             <outlet property="placeLocation" destination="phc-1O-Pvj" id="sdS-PW-B8R"/>
                                             <outlet property="placeName" destination="b8F-C3-l3F" id="QOc-SK-U6J"/>
                                             <outlet property="placeType" destination="HYn-Bw-xpq" id="vYR-z5-C4f"/>
+                                            <outlet property="starStackView" destination="r38-gm-Hpa" id="68A-5v-2Vw"/>
                                             <segue destination="C90-QF-ygc" kind="show" identifier="editAction" id="xzc-qO-spf"/>
                                         </connections>
                                     </tableViewCell>
@@ -359,6 +440,8 @@
     <resources>
         <image name="Photo" width="195" height="196"/>
         <image name="ZA" width="25" height="24"/>
+        <image name="cancel" width="128" height="128"/>
+        <image name="map" width="50" height="50"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

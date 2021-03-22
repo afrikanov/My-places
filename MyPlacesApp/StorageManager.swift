@@ -30,6 +30,7 @@ class StorageManager {
             placeToEdit.type = placeNew.type
             placeToEdit.location = placeNew.location
             placeToEdit.imageData = placeNew.imageData
+            placeToEdit.rating = placeNew.rating
         }
     }
 }

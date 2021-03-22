@@ -13,5 +13,6 @@ class CustomTableViewCell: UITableViewCell {
     @IBOutlet weak var placeName: UILabel!
     @IBOutlet weak var placeLocation: UILabel!
     @IBOutlet weak var placeType: UILabel!
+    @IBOutlet weak var starStackView: StarStackView!
 
 }

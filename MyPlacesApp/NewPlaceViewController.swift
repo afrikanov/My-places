@@ -14,7 +14,8 @@ class NewPlaceViewController: UITableViewController {
     @IBOutlet weak var placeLocation: UITextField!
     @IBOutlet weak var placeType: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
-    @IBOutlet weak var starsStackView: UIStackView!
+    @IBOutlet weak var starsStackView: StarStackView!
+    @IBOutlet weak var mapButton: UIButton!
     
     var photoChanged = false
     var placeToEdit: Place?
@@ -27,13 +28,17 @@ class NewPlaceViewController: UITableViewController {
         placeLocation.delegate = self
         placeType.delegate = self
         self.saveButton.isEnabled = false
+        self.mapButton.isEnabled = false
         
         if self.placeToEdit != nil {
             self.setupContent()
             self.setupNavigationBar()
         }
+        mapButton.layer.cornerRadius = mapButton.frame.height / 2
         
         placeLabel.addTarget(self, action: #selector(placeLabelChanged), for: .editingChanged)
+        placeLocation.addTarget(self, action: #selector(placeLocationChanged), for: .editingChanged)
+        
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -75,6 +80,8 @@ class NewPlaceViewController: UITableViewController {
         self.placeImage.contentMode = .scaleAspectFill
         self.placeType.text = self.placeToEdit?.type
         self.placeLocation.text = self.placeToEdit?.location
+        self.starsStackView.currentRating = self.placeToEdit!.rating
+        self.mapButton.isEnabled = true
     }
     
     func setupNavigationBar() {
@@ -99,7 +106,7 @@ class NewPlaceViewController: UITableViewController {
             imageData = UIImage(named: "imagePlaceholder")?.pngData()
         }
         
-        let place = Place(name: self.placeLabel.text!, location: self.placeLocation.text, type: self.placeType.text, imageData: imageData)
+        let place = Place(name: self.placeLabel.text!, location: self.placeLocation.text, type: self.placeType.text, imageData: imageData, rating: starsStackView.currentRating)
         
         if self.placeToEdit != nil {
             StorageManager.editObject(place, placeToEdit!)
@@ -111,7 +118,27 @@ class NewPlaceViewController: UITableViewController {
     @IBAction func cancelAction(_ sender: Any) {
         dismiss(animated: true)
     }
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "openMapAction" {
+            guard let mapVC = segue.destination as? MapViewController else {
+                return
+            }
+            var imageData: Data!
+            
+            if self.placeToEdit != nil {
+                self.photoChanged = true
+            }
+            
+            if self.photoChanged {
+                imageData = self.placeImage.image?.pngData()
+            } else {
+                imageData = UIImage(named: "imagePlaceholder")?.pngData()
+            }
+            let place = Place(name: self.placeLabel.text!, location: self.placeLocation.text, type: self.placeType.text, imageData: imageData, rating: starsStackView.currentRating)
+            mapVC.place = place
+        }
+    }
 }
 
 // MARK: TextField
@@ -128,6 +155,14 @@ extension NewPlaceViewController: UITextFieldDelegate {
             self.saveButton.isEnabled = false
         } else {
             self.saveButton.isEnabled = true
+        }
+    }
+    
+    @objc func placeLocationChanged() {
+        if self.placeLocation.text?.isEmpty == true {
+            self.mapButton.isEnabled = false
+        } else {
+            self.mapButton.isEnabled = true
         }
     }
     
